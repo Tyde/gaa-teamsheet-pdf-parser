@@ -12,7 +12,7 @@ class ParseTestDocumentsTest {
         val filePairs = pdfs.map { file ->
             val jsonFile = File(file.absolutePath.replace(".pdf", ".json"))
             (file to jsonFile)
-        }.filter { (pdf, json) -> json.exists() }
+        }.filter { (_, json) -> json.exists() }
         //Then compare the json files
         filePairs.forEach { (pdf, json) ->
             val players = TeamsheetReader.readFromPath(pdf.absolutePath)
