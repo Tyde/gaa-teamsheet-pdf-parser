@@ -12,7 +12,15 @@ fun main() {
         //Write into json file (same name as source document but with json ending):
         val jsonFile = File(file.absolutePath.replace(".pdf", ".json"))
 
-        jsonFile.writeText(Json.encodeToString(players))
+        players.fold(
+            onSuccess = {
+                println("Successfully read teamsheet from ${file.name}: ${it.size} players")
+            },
+            onFailure = {
+                println("Could not read teamsheet from ${file.name}")
+            }
+        )
+        //jsonFile.writeText(Json.encodeToString(players))
     }
 }
 
