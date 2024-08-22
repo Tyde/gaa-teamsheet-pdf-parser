@@ -55,13 +55,13 @@ object TeamsheetReader {
     }
 
     private fun mapLinesToExtractedPlayers(lines: List<List<String>>): Result<List<ExtractedPlayer>> {
-        val pattern = """(\d{2}\/\d{2}\/\d{4})?\s?([0-9]+)\s(.*)""".toRegex()
+        val pattern = """(?:((?:\d{2}\/\d{2}\/\d{4})|\d{4})\s)?(?:([0-9]+)\s)?([^\d]*)""".toRegex()
         try {
             return Result.success(lines.map { (firstLine, secondLine) ->
                 val irishName = firstLine.trim()
                 val pair = pattern.find(secondLine.trim()) ?: return@map null
                 val dateOfBirth = pair.groupValues[1]
-                val number = pair.groupValues[2].toInt()
+                val number = pair.groupValues[2].toLongOrNull()
                 val romanName = pair.groupValues[3]
                 ExtractedPlayer(number, irishName, romanName, dateOfBirth)
             }.filterNotNull())
@@ -75,7 +75,7 @@ object TeamsheetReader {
 
 @Serializable
 data class ExtractedPlayer(
-    val number: Int,
+    val number: Long?,
     val irishName: String,
     val romanName: String,
     val dateOfBirth: String,

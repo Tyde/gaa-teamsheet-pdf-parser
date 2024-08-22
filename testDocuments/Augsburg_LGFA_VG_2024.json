@@ -1,1 +1,14 @@
-[{"number":1992,"irishName":"Friedericke Vogler","romanName":"5594153 Friederike Vogler","dateOfBirth":""},{"number":1990,"irishName":"Jana Wentz","romanName":"5749317 Jana Wentz","dateOfBirth":""}]
+[
+    {
+        "number": 5594153,
+        "irishName": "Friedericke Vogler",
+        "romanName": "Friederike Vogler",
+        "dateOfBirth": "1992"
+    },
+    {
+        "number": 5749317,
+        "irishName": "Jana Wentz",
+        "romanName": "Jana Wentz",
+        "dateOfBirth": "1990"
+    }
+]

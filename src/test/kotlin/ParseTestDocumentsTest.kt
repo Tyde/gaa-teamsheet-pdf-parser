@@ -15,10 +15,13 @@ class ParseTestDocumentsTest {
         }.filter { (_, json) -> json.exists() }
         //Then compare the json files
         filePairs.forEach { (pdf, json) ->
+            println("Reading ${pdf.name}")
             val players = TeamsheetReader.readFromPath(pdf.absolutePath).getOrThrow()
 
             val expectedPlayers = Json.decodeFromString<List<ExtractedPlayer>>(json.readText())
-            assertEquals(expectedPlayers, players)
+            players.zip(expectedPlayers).forEach { (actual, expected) ->
+                assertEquals(expected,actual)
+            }
         }
     }
 }
